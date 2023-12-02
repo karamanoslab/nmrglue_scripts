@@ -7,6 +7,8 @@ import sys
 
 import warnings
 warnings.filterwarnings("ignore")
+plt.style.use('dark_background')
+
 
 # read in the data from a NMRPipe file
 if len(sys.argv)<2 or sys.argv[1] == '-h' or  sys.argv[1]=='-help' :
@@ -19,21 +21,26 @@ dic, data = ng.pipe.read(spectrum)
 
 # plot parameters
 cmap = matplotlib.cm.Blues_r    # contour map (colors to use for contours)
+cmap_neg = matplotlib.cm.Reds    # contour map (colors to use for contours)
 contour_start = 500000           # contour level start value
 contour_num = 20                # number of contour levels
 contour_factor = 1.20          # scaling factor between contour levels
 
 # calculate contour levels
 cl = contour_start * contour_factor ** np.arange(contour_num) 
+cl_neg = -cl[::-1]
 
 # create the figure
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure(figsize=(5, 5))
 ax = fig.add_subplot(111)
 
 f_d=ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
 
 ax.set_ylabel("f1 (points)")
 ax.set_xlabel("f2 (points)")
+ax.xaxis.label.set_color('white')
+ax.xaxis.label.set_color('white')
 
 ax_Cont = fig.add_axes([0.1, 0.96, 0.2, 0.02])
 ax_Cont.spines['top'].set_visible(True)
@@ -66,7 +73,7 @@ ax_P1v.spines['top'].set_visible(True)
 ax_P1v.spines['right'].set_visible(True)
 
 
-s_Cont = Slider(ax=ax_Cont, label='2D cont', valmin=100, valmax=np.max(data)*0.2,
+s_Cont = Slider(ax=ax_Cont, label='2D cont', valmin=1000, valmax=np.max(data)*0.2,
               valinit=contour_start, valfmt=' %1.1f ', facecolor='#cc7000')
 
 s_h = Slider(ax=ax_h, label='h ', valmin=0, valmax=data.shape[0] - 1,
@@ -107,7 +114,10 @@ def animate(val):
     ax.cla()
 
     cl = contour_start * contour_factor ** np.arange(contour_num) 
+    cl_neg = -cl[::-1]
     ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+    ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+
 
     # plot slices in each direction
     xslice = data[int(h), :]    
