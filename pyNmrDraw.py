@@ -31,7 +31,7 @@ cl = contour_start * contour_factor ** np.arange(contour_num)
 cl_neg = -cl[::-1]
 
 # create the figure
-fig = plt.figure(figsize=(5, 5))
+fig = plt.figure(figsize=(10, 10))
 ax = fig.add_subplot(111)
 
 f_d=ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
