@@ -2,20 +2,39 @@ import nmrglue as ng
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, RangeSlider
 import sys
-
+from optparse import OptionParser
 import warnings
 warnings.filterwarnings("ignore")
-plt.style.use('dark_background')
 
+
+'author: @theok'
 
 # read in the data from a NMRPipe file
-if len(sys.argv)<2 or sys.argv[1] == '-h' or  sys.argv[1]=='-help' :
+if len(sys.argv)<2  :
     print("\n Run as python pyNmrDraw.py [path to 2D spectrum]\n")
     sys.exit(-1)
 else:
     spectrum=sys.argv[1]
+
+
+parser = OptionParser(usage = """\n python %prog [path to 1D/2d spectrum] [options] \n
+   Script to plot and save 1D or 2D nmrdata
+   requires nmrglue 0.8 or later
+""")
+
+parser.add_option("-w", "--whiteBackground", dest="wb", action="store_true",
+                  help="option to have a white baground",
+                  default=False)
+                  
+               
+(options, args) = parser.parse_args()
+wb=options.wb
+
+if not wb :
+    plt.style.use('dark_background')
+
 
 dic, data = ng.pipe.read(spectrum)
 
@@ -33,9 +52,7 @@ cl_neg = -cl[::-1]
 # create the figure
 fig = plt.figure(figsize=(10, 10))
 ax = fig.add_subplot(111)
-
-f_d=ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
-ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+    
 
 ax.set_ylabel("f1 (points)")
 ax.set_xlabel("f2 (points)")
@@ -73,8 +90,18 @@ ax_P1v.spines['top'].set_visible(True)
 ax_P1v.spines['right'].set_visible(True)
 
 
-s_Cont = Slider(ax=ax_Cont, label='2D cont', valmin=1000, valmax=np.max(data)*0.2,
-              valinit=contour_start, valfmt=' %1.1f ', facecolor='#cc7000')
+if (data.shape[0]!=1):
+    f_d=ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+    ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+    
+    s_Cont = Slider(ax=ax_Cont, label='2D cont', valmin=1000, valmax=np.max(data)*0.2,
+              valinit=contour_start, valfmt=' %i ', facecolor='#cc7000')
+              
+else:
+    ax.plot(range(data.shape[1]), data[0])
+    ax.set_ylim( min(data[0])*1.2 ,max(ax.get_ylim()))
+    s_Cont = RangeSlider(ax_Cont, 'Int', np.min(data)*1.5, np.max(data)*1.5, facecolor='#cc7000')
+
 
 s_h = Slider(ax=ax_h, label='h ', valmin=0, valmax=data.shape[0] - 1,
               valinit=0, valfmt=' %i pnts', facecolor='#cc7000')
@@ -84,20 +111,20 @@ s_v = Slider(ax=ax_v, label='v ', valmin=0, valmax=data.shape[1] - 1,
 
 
 s_P0h = Slider(ax=ax_P0h, label='P0', valmin=-180, valmax=180,
-              valinit=0, valfmt=' %i deg', facecolor='#cc7000')
+              valinit=0, valfmt=' %.1f deg', facecolor='#cc7000')
 
 s_P1h = Slider(ax=ax_P1h, label='P1', valmin=-180, valmax=180,
-              valinit=0, valfmt=' %i deg', facecolor='#cc7000')
+              valinit=0, valfmt=' %.1f deg', facecolor='#cc7000')
 
 s_P0v = Slider(ax=ax_P0v, label='P0', valmin=-180, valmax=180,
-              valinit=0, valfmt=' %i deg', facecolor='#cc7000')
+              valinit=0, valfmt=' %.1f deg', facecolor='#cc7000')
 
 s_P1v = Slider(ax=ax_P1v, label='P1', valmin=-180, valmax=180,
-              valinit=0, valfmt=' %i deg', facecolor='#cc7000')
+              valinit=0, valfmt=' %.1f deg', facecolor='#cc7000')
 
 
 def animate(val):  
-    contour_start = s_Cont.val
+    
     h=s_h.val
     v=s_v.val
     p0h=s_P0h.val
@@ -112,30 +139,42 @@ def animate(val):
     p1v = p1v * np.pi / 180.
 
     ax.cla()
-
-    cl = contour_start * contour_factor ** np.arange(contour_num) 
-    cl_neg = -cl[::-1]
-    ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
-    ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
-
-
-    # plot slices in each direction
-    xslice = data[int(h), :]    
-    ht=ng.proc_base.ht(xslice, N=xslice.shape[-1])  #hilbelt transform to reconstruct imaginaries
-    apodx = np.exp(1.0j * (p0h + (p1h * np.arange(data.shape[1]) / data.shape[1])))
-    phasedx=ht*apodx
-
-    ax.plot(range(data.shape[1]), [h]*data.shape[1], '-y' ) 
-    ax.plot(range(data.shape[1]), phasedx / (contour_start/10))# + h)
+    
+    if (data.shape[0]!=1):
+        contour_start = s_Cont.val
+        cl = contour_start * contour_factor ** np.arange(contour_num) 
+        cl_neg = -cl[::-1]
+         
+        ax.contour(data, cl, cmap=cmap, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
+        ax.contour(data, cl_neg, cmap=cmap_neg, extent=(0, data.shape[1] - 1, 0, data.shape[0] - 1))
 
 
-    yslice = data[:, int(v)]
-    ht=ng.proc_base.ht(yslice, N=yslice.shape[-1])
-    apody = np.exp(1.0j * (p0v + (p1v * np.arange(data.shape[0]) / data.shape[0])))
-    phasedy=ht*apody
+        # plot slices in each direction
+        xslice = data[int(h), :]    
+        ht=ng.proc_base.ht(xslice, N=xslice.shape[-1])  #hilbelt transform to reconstruct imaginaries
+        apodx = np.exp(1.0j * (p0h + (p1h * np.arange(data.shape[1]) / data.shape[1])))
+        phasedx=ht*apodx
 
-    ax.plot( [v]*data.shape[0], range(data.shape[0]))
-    ax.plot( phasedy / (contour_start/10) + 0, range(data.shape[0]))
+        ax.plot(range(data.shape[1]), [h]*data.shape[1], '-y' ) 
+        ax.plot(range(data.shape[1]), phasedx / (contour_start/10))# + h)
+
+
+        yslice = data[:, int(v)]
+        ht=ng.proc_base.ht(yslice, N=yslice.shape[-1])
+        apody = np.exp(1.0j * (p0v + (p1v * np.arange(data.shape[0]) / data.shape[0])))
+        phasedy=ht*apody
+
+        ax.plot( [v]*data.shape[0], range(data.shape[0]))
+        ax.plot( phasedy / (contour_start/10) + 0, range(data.shape[0]))
+    
+    else:
+        min_Int, max_Int=s_Cont.val[0], s_Cont.val[1]
+        ht=ng.proc_base.ht(data[0], N=data.shape[-1])  #hilbelt transform to reconstruct imaginaries
+        apodx = np.exp(1.0j * (p0h + (p1h * np.arange(data.shape[1]) / data.shape[1])))
+        phasedx=ht*apodx
+        
+        ax.plot(range(data.shape[1]),  phasedx ) 
+        ax.set_ylim(min_Int, max_Int)
     plt.draw()
     #fig.canvas.draw_idle()
 
