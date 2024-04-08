@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.1
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= gmc
+$$ 2020-06-02 16:16:05.986 -0400  gmc@newav600
+$$ /gmcdisk/data/theok/nmr/010620_CTD_titration_288K/3/pdata/999/used_from
+$$ process /opt/topspin3.1/prog/mod/proc1d
+##$CUREXP= <ser>
+##$DATPATH= </gmcdisk/data/theok/nmr>
+##$EXPNO= 3
+##$NAME= <010620_CTD_titration_288K>
+##$PROCNO= 1
+##$PROCNO2= 1
+##END=

@@ -1,0 +1,23 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.1
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= gmc
+$$ /gmcdisk/data/theok/nmr/010620_CTD_titration_288K/9/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2020-06-02 21:27:38.798 -0400>,<gmc>,<newav600>,<go>,<TOPSPIN 3.1>,
+      <created by zg
+	started at 2020-06-02 20:29:42.245 -0400,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       F0 8E CD DF E1 E1 9E 6F AE 11 26 EC 19 F0 C5 96
+       data hash MD5: 1K * 256
+       99 41 1F 04 DD 4B 64 B7 08 07 26 36 D2 D5 7A 0D>)
+(   2,<2020-06-02 23:39:45.230 -0400>,<gmc>,<newav600>,<proc2d>,<TOPSPIN 3.1>,
+      <Start of raw data processing
+       xfb F2: SI = 2K BC_mod = 4 WDW = 4 SSB = 2 FT_mod = 6 PKNL = 1 PHC0 = 53.5 PHC1 = 0 F1: SI = 256 WDW = 4 SSB = 2 FT_mod = 4 PHC0 = 90 PHC1 = -180 MC2 = 4
+       data hash MD5: 2K * 256
+       9D B5 EC C1 00 56 14 E6 67 41 44 3D AA C0 E7 98>)
+##END=
+
+$$ hash MD5
+$$ A6 58 44 96 9C 44 EC 94 86 84 C9 4B CB 1F 36 D5

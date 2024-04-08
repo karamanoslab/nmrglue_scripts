@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.1
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= gmc
+$$ 2020-06-02 16:15:33.298 -0400  gmc@newav600
+$$ /gmcdisk/data/theok/nmr/010620_CTD_titration_288K/6/pdata/999/outd
+$$ process /opt/topspin3.1/prog/mod/proc1d
+##$CURPLOT= <HP_LaserJet_P2055>
+##$CURPRIN= <$HP_LaserJet_P2055>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/1D_X.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##END=

@@ -13,19 +13,19 @@ warnings.filterwarnings("ignore")
 
 # read in the data from a NMRPipe file
 if len(sys.argv)<2  :
-    print("\n Run as python pyNmrDraw.py [path to 2D spectrum]\n")
+    print("\n Run as python pyNmrDraw.py [path to 1D/2D spectrum]\n")
     sys.exit(-1)
 else:
     spectrum=sys.argv[1]
 
 
-parser = OptionParser(usage = """\n python %prog [path to 1D/2d spectrum] [options] \n
+parser = OptionParser(usage = """\n python %prog [path to 1D/2D spectrum] [options] \n
    Script to plot and save 1D or 2D nmrdata
    requires nmrglue 0.8 or later
 """)
 
 parser.add_option("-w", "--whiteBackground", dest="wb", action="store_true",
-                  help="option to have a white baground",
+                  help="option to have a white background",
                   default=False)
                   
                
@@ -132,7 +132,7 @@ def animate(val):
     p0v=s_P0v.val
     p1v=s_P1v.val
     
-    p0h = p0h * np.pi / 180.  # convert to radians
+    p0h = p0h * np.pi / 180.
     p1h = p1h * np.pi / 180.
 
     p0v = p0v * np.pi / 180. 

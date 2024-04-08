@@ -1,0 +1,28 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.1
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 16	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= gmc
+$$ 2020-06-01 20:07:47.568 -0400  gmc@newav600
+$$ /gmcdisk/data/theok/nmr/010620_CTD_titration_288K/1/pdata/1/clevels
+$$ process /opt/topspin3.1/prog/mod/dataserver
+##$LEVELS= (0..255)
+-167093.2 -119352.3 -85251.6 -60894 -43495.7 -31068.4 -22191.7 -15851.2
+-11322.3 -8087.4 -5776.7 -4126.2 4126.2 5776.7 8087.4 11322.3 15851.2 22191.7
+31068.4 43495.7 60894 85251.6 119352.3 167093.2 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0
+##$LEVSIGN= 3
+##$MAXLEV= 12
+##$METHOD= 0
+##$NEGBASE= -4126.2
+##$NEGINCR= 1.4
+##$POSBASE= 4126.2
+##$POSINCR= 1.4
+##END=

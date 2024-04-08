@@ -1,0 +1,17 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.1
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= gmc
+$$ /gmcdisk/data/theok/nmr/010620_CTD_titration_288K/1/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2020-06-01 19:55:42.100 -0400>,<gmc>,<newav600>,<go>,<TOPSPIN 3.1>,
+      <acquisition in progress>)
+(   2,<2020-06-01 20:53:12.436 -0400>,<gmc>,<newav600>,<proc2d>,<TOPSPIN 3.1>,
+      <Start of raw data processing
+       xfb F2: SI = 2K BC_mod = 4 WDW = 4 SSB = 2 FT_mod = 6 PKNL = 1 PHC0 = 53.5 PHC1 = 0 F1: SI = 256 WDW = 4 SSB = 2 FT_mod = 4 PHC0 = 90 PHC1 = -180 MC2 = 4
+       data hash MD5: 2K * 256
+       6F 40 3B 5F A2 C6 A1 EC 72 3A 9A 9E F5 36 2C 40>)
+##END=
+
+$$ hash MD5
+$$ 2F 8F BD F3 03 BB B9 0B 0F C6 82 63 B8 C3 2D 18
